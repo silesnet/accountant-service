@@ -1,27 +1,22 @@
 package net.snet.accountant.resources;
 
 import com.yammer.metrics.annotation.Timed;
-import net.snet.accountant.bo.Bill;
-import net.snet.accountant.bo.BillItem;
-import net.snet.accountant.bo.Customer;
-import net.snet.accountant.bo.Invoices;
+import net.snet.accountant.bo.*;
 import net.snet.accountant.dao.BillDAO;
 import net.snet.accountant.dao.BillItemDAO;
 import net.snet.accountant.dao.CustomerDAO;
+import net.snet.accountant.util.PATCH;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.sql.Timestamp;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 
-@Path("/invoicings/{invoicingId}/invoices")
+@Path("/invoicings")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AccountantResource {
@@ -37,7 +32,26 @@ public class AccountantResource {
         this.dbi = dbi;
     }
 
+    @PATCH
+    @Path("/{invoicingId}")
+    @Timed(name = "post-requests")
+    public Response synchonizedBills(InvoicesPatch list) {
+        LOGGER.debug("synchronized bills called");
+
+        billDAO = dbi.onDemand(BillDAO.class);
+
+
+        for (BillPatch bill : list.getInvoices()) {
+
+            billDAO.updateTime(bill.getId(), bill.getUpdates().get(0).getSynchronized_on());
+        }
+
+        billDAO.close();
+        return Response.ok().build();
+    }
+
     @GET
+    @Path("/{invoicingId}/invoices")
     @Timed(name = "get-requests")
     public Invoices getInvoice(@PathParam("invoicingId") long invoicing_id) {
         LOGGER.debug("invoices called");

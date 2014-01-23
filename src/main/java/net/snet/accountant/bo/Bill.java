@@ -1,6 +1,5 @@
 package net.snet.accountant.bo;
 
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 

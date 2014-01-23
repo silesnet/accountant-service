@@ -4,6 +4,7 @@ import net.snet.accountant.bo.Bill;
 import net.snet.accountant.mapper.BillMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.sql.Timestamp;
@@ -14,6 +15,9 @@ public interface BillDAO {
 
     @SqlQuery("select * from bills where id = :id")
     Bill findById(@Bind("id") long id);
+
+    @SqlUpdate("update bills set synchronized = :time where id = :id")
+    void updateTime(@Bind("id") int id, @Bind("time") Timestamp time);
 
     @SqlQuery("select * from bills where invoicing_id = :id")
     Iterator<Bill> findAllBillsByInvoicingId(@Bind("id") long id);
