@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Invoices {
 
-    private ArrayList<Invoice> invoices;
+    private ArrayList<Bill> invoices;
 
     public Invoices() {
-        this.invoices = new ArrayList<Invoice>();
+        this.invoices = new ArrayList<Bill>();
     }
 
-    public ArrayList<Invoice> getInvoices() {
+    public ArrayList<Bill> getInvoices() {
         return invoices;
     }
 
-    public void addInvoice(Invoice invoice) {
-        this.invoices.add(invoice);
+    public void addInvoice(Bill bill) {
+        this.invoices.add(bill);
     }
 
 }
