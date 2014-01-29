@@ -1,82 +1,103 @@
 package net.snet.accountant.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yammer.dropwizard.json.JsonSnakeCase;
+
 import java.sql.Timestamp;
 
+@JsonSnakeCase
 public class Customer {
     private long id;
-    private long history_id;
-    private String public_id;
+    @JsonProperty
+    private long historyId;
+    @JsonProperty
+    private String publicId;
     private String name;
-    private String supplementary_name;
+    @JsonProperty
+    private String supplementaryName;
     private String street;
     private String city;
-    private String postal_code;
+    @JsonProperty
+    private String postalCode;
     private int country;
     private String email;
     private String dic;
-    private String contract_no;
-    private String connection_spot;
-    private Timestamp inserted_on;
+    @JsonProperty
+    private String contractNo;
+    @JsonProperty
+    private String connectionSpot;
+    @JsonProperty
+    private Timestamp insertedOn;
     private int frequency;
-    private Timestamp lastly_billed;
-    private boolean is_billed_after;
-    private boolean deliver_by_email;
-    private String deliver_copy_email;
-    private boolean deliver_by_mail;
-    private boolean is_auto_billing;
+    @JsonProperty
+    private Timestamp lastlyBilled;
+    private boolean isBilledAfter;
+    @JsonProperty
+    private boolean deliverByEmail;
+    @JsonProperty
+    private String deliverCopyEmail;
+    @JsonProperty
+    private boolean deliverByMail;
+    private boolean isAutoBilling;
     private String info;
-    private String contact_name;
+    @JsonProperty
+    private String contactName;
     private String phone;
-    private boolean is_active;
+    private boolean isActive;
     private int status;
-    private long shire_id;
+    @JsonProperty
+    private long shireId;
     private int format;
-    private boolean deliver_signed;
+    @JsonProperty
+    private boolean deliverSigned;
     private String symbol;
     private Timestamp updated;
-    private Timestamp synchronized_customer;
-    private String account_no;
-    private String bank_no;
+    @JsonProperty("synchronized")
+    private Timestamp synchronizedCustomer;
+    @JsonProperty
+    private String accountNo;
+    @JsonProperty
+    private String bankNo;
     private int variable;
 
     public Customer() {
     }
 
-    public Customer(long id, long history_id, String public_id, String name, String supplementary_name, String street, String city, String postal_code, int country, String email, String dic, String contract_no, String connection_spot, Timestamp inserted_on, int frequency, Timestamp lastly_billed, boolean is_billed_after, boolean deliver_by_email, String deliver_copy_email, boolean deliver_by_mail, boolean is_auto_billing, String info, String contact_name, String phone, boolean is_active, int status, long shire_id, int format, boolean deliver_signed, String symbol, Timestamp updated, Timestamp synchronized_customer, String account_no, String bank_no, int variable) {
+    public Customer(long id, long historyId, String publicId, String name, String supplementaryName, String street, String city, String postalCode, int country, String email, String dic, String contractNo, String connectionSpot, Timestamp insertedOn, int frequency, Timestamp lastlyBilled, boolean isBilledAfter, boolean deliverByEmail, String deliverCopyEmail, boolean deliverByMail, boolean isAutoBilling, String info, String contactName, String phone, boolean isActive, int status, long shireId, int format, boolean deliverSigned, String symbol, Timestamp updated, Timestamp synchronizedCustomer, String accountNo, String bankNo, int variable) {
         this.id = id;
-        this.history_id = history_id;
-        this.public_id = public_id;
+        this.historyId = historyId;
+        this.publicId = publicId;
         this.name = name;
-        this.supplementary_name = supplementary_name;
+        this.supplementaryName = supplementaryName;
         this.street = street;
         this.city = city;
-        this.postal_code = postal_code;
+        this.postalCode = postalCode;
         this.country = country;
         this.email = email;
         this.dic = dic;
-        this.contract_no = contract_no;
-        this.connection_spot = connection_spot;
-        this.inserted_on = inserted_on;
+        this.contractNo = contractNo;
+        this.connectionSpot = connectionSpot;
+        this.insertedOn = insertedOn;
         this.frequency = frequency;
-        this.lastly_billed = lastly_billed;
-        this.is_billed_after = is_billed_after;
-        this.deliver_by_email = deliver_by_email;
-        this.deliver_copy_email = deliver_copy_email;
-        this.deliver_by_mail = deliver_by_mail;
-        this.is_auto_billing = is_auto_billing;
+        this.lastlyBilled = lastlyBilled;
+        this.isBilledAfter = isBilledAfter;
+        this.deliverByEmail = deliverByEmail;
+        this.deliverCopyEmail = deliverCopyEmail;
+        this.deliverByMail = deliverByMail;
+        this.isAutoBilling = isAutoBilling;
         this.info = info;
-        this.contact_name = contact_name;
+        this.contactName = contactName;
         this.phone = phone;
-        this.is_active = is_active;
+        this.isActive = isActive;
         this.status = status;
-        this.shire_id = shire_id;
+        this.shireId = shireId;
         this.format = format;
-        this.deliver_signed = deliver_signed;
+        this.deliverSigned = deliverSigned;
         this.symbol = symbol;
         this.updated = updated;
-        this.synchronized_customer = synchronized_customer;
-        this.account_no = account_no;
-        this.bank_no = bank_no;
+        this.synchronizedCustomer = synchronizedCustomer;
+        this.accountNo = accountNo;
+        this.bankNo = bankNo;
         this.variable = variable;
     }
 
@@ -88,20 +109,20 @@ public class Customer {
         this.id = id;
     }
 
-    public long getHistory_id() {
-        return history_id;
+    public long getHistoryId() {
+        return historyId;
     }
 
-    public void setHistory_id(long history_id) {
-        this.history_id = history_id;
+    public void setHistoryId(long historyId) {
+        this.historyId = historyId;
     }
 
-    public String getPublic_id() {
-        return public_id;
+    public String getPublicId() {
+        return publicId;
     }
 
-    public void setPublic_id(String public_id) {
-        this.public_id = public_id;
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 
     public String getName() {
@@ -112,12 +133,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getSupplementary_name() {
-        return supplementary_name;
+    public String getSupplementaryName() {
+        return supplementaryName;
     }
 
-    public void setSupplementary_name(String supplementary_name) {
-        this.supplementary_name = supplementary_name;
+    public void setSupplementaryName(String supplementaryName) {
+        this.supplementaryName = supplementaryName;
     }
 
     public String getStreet() {
@@ -136,12 +157,12 @@ public class Customer {
         this.city = city;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public int getCountry() {
@@ -168,28 +189,28 @@ public class Customer {
         this.dic = dic;
     }
 
-    public String getContract_no() {
-        return contract_no;
+    public String getContractNo() {
+        return contractNo;
     }
 
-    public void setContract_no(String contract_no) {
-        this.contract_no = contract_no;
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
     }
 
-    public String getConnection_spot() {
-        return connection_spot;
+    public String getConnectionSpot() {
+        return connectionSpot;
     }
 
-    public void setConnection_spot(String connection_spot) {
-        this.connection_spot = connection_spot;
+    public void setConnectionSpot(String connectionSpot) {
+        this.connectionSpot = connectionSpot;
     }
 
-    public Timestamp getInserted_on() {
-        return inserted_on;
+    public Timestamp getInsertedOn() {
+        return insertedOn;
     }
 
-    public void setInserted_on(Timestamp inserted_on) {
-        this.inserted_on = inserted_on;
+    public void setInsertedOn(Timestamp insertedOn) {
+        this.insertedOn = insertedOn;
     }
 
     public int getFrequency() {
@@ -200,52 +221,56 @@ public class Customer {
         this.frequency = frequency;
     }
 
-    public Timestamp getLastly_billed() {
-        return lastly_billed;
+    public Timestamp getLastlyBilled() {
+        return lastlyBilled;
     }
 
-    public void setLastly_billed(Timestamp lastly_billed) {
-        this.lastly_billed = lastly_billed;
+    public void setLastlyBilled(Timestamp lastlyBilled) {
+        this.lastlyBilled = lastlyBilled;
     }
 
-    public boolean isIs_billed_after() {
-        return is_billed_after;
+    @JsonProperty("isBilledAfter")
+    public boolean isBilledAfter() {
+        return isBilledAfter;
     }
 
-    public void setIs_billed_after(boolean is_billed_after) {
-        this.is_billed_after = is_billed_after;
+    @JsonProperty("isBilledAfter")
+    public void setBilledAfter(boolean isBilledAfter) {
+        this.isBilledAfter = isBilledAfter;
     }
 
-    public boolean isDeliver_by_email() {
-        return deliver_by_email;
+    public boolean isDeliverByEmail() {
+        return deliverByEmail;
     }
 
-    public void setDeliver_by_email(boolean deliver_by_email) {
-        this.deliver_by_email = deliver_by_email;
+    public void setDeliverByEmail(boolean deliverByEmail) {
+        this.deliverByEmail = deliverByEmail;
     }
 
-    public String getDeliver_copy_email() {
-        return deliver_copy_email;
+    public String getDeliverCopyEmail() {
+        return deliverCopyEmail;
     }
 
-    public void setDeliver_copy_email(String deliver_copy_email) {
-        this.deliver_copy_email = deliver_copy_email;
+    public void setDeliverCopyEmail(String deliverCopyEmail) {
+        this.deliverCopyEmail = deliverCopyEmail;
     }
 
-    public boolean isDeliver_by_mail() {
-        return deliver_by_mail;
+    public boolean isDeliverByMail() {
+        return deliverByMail;
     }
 
-    public void setDeliver_by_mail(boolean deliver_by_mail) {
-        this.deliver_by_mail = deliver_by_mail;
+    public void setDeliverByMail(boolean deliverByMail) {
+        this.deliverByMail = deliverByMail;
     }
 
-    public boolean isIs_auto_billing() {
-        return is_auto_billing;
+    @JsonProperty("isAutoBilling")
+    public boolean isAutoBilling() {
+        return isAutoBilling;
     }
 
-    public void setIs_auto_billing(boolean is_auto_billing) {
-        this.is_auto_billing = is_auto_billing;
+    @JsonProperty("isAutoBilling")
+    public void setAutoBilling(boolean isAutoBilling) {
+        this.isAutoBilling = isAutoBilling;
     }
 
     public String getInfo() {
@@ -256,12 +281,12 @@ public class Customer {
         this.info = info;
     }
 
-    public String getContact_name() {
-        return contact_name;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setContact_name(String contact_name) {
-        this.contact_name = contact_name;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     public String getPhone() {
@@ -272,12 +297,14 @@ public class Customer {
         this.phone = phone;
     }
 
-    public boolean isIs_active() {
-        return is_active;
+    @JsonProperty("isActive")
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setIs_active(boolean is_active) {
-        this.is_active = is_active;
+    @JsonProperty("isActive")
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getStatus() {
@@ -288,12 +315,12 @@ public class Customer {
         this.status = status;
     }
 
-    public long getShire_id() {
-        return shire_id;
+    public long getShireId() {
+        return shireId;
     }
 
-    public void setShire_id(long shire_id) {
-        this.shire_id = shire_id;
+    public void setShireId(long shireId) {
+        this.shireId = shireId;
     }
 
     public int getFormat() {
@@ -304,12 +331,12 @@ public class Customer {
         this.format = format;
     }
 
-    public boolean isDeliver_signed() {
-        return deliver_signed;
+    public boolean isDeliverSigned() {
+        return deliverSigned;
     }
 
-    public void setDeliver_signed(boolean deliver_signed) {
-        this.deliver_signed = deliver_signed;
+    public void setDeliverSigned(boolean deliverSigned) {
+        this.deliverSigned = deliverSigned;
     }
 
     public String getSymbol() {
@@ -328,28 +355,28 @@ public class Customer {
         this.updated = updated;
     }
 
-    public Timestamp getSynchronized_customer() {
-        return synchronized_customer;
+    public Timestamp getSynchronizedCustomer() {
+        return synchronizedCustomer;
     }
 
-    public void setSynchronized_customer(Timestamp synchronized_customer) {
-        this.synchronized_customer = synchronized_customer;
+    public void setSynchronizedCustomer(Timestamp synchronizedCustomer) {
+        this.synchronizedCustomer = synchronizedCustomer;
     }
 
-    public String getAccount_no() {
-        return account_no;
+    public String getAccountNo() {
+        return accountNo;
     }
 
-    public void setAccount_no(String account_no) {
-        this.account_no = account_no;
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 
-    public String getBank_no() {
-        return bank_no;
+    public String getBankNo() {
+        return bankNo;
     }
 
-    public void setBank_no(String bank_no) {
-        this.bank_no = bank_no;
+    public void setBankNo(String bankNo) {
+        this.bankNo = bankNo;
     }
 
     public int getVariable() {

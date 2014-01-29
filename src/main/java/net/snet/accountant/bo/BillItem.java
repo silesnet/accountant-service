@@ -1,30 +1,35 @@
 package net.snet.accountant.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yammer.dropwizard.json.JsonSnakeCase;
+
+@JsonSnakeCase
 public class BillItem {
 
-    private long bill_id;
+    @JsonProperty
+    private long billId;
     private String text;
     private float amount;
     private int price;
-    private boolean is_display_unit;
+    private boolean isDisplayUnit;
 
     public BillItem() {
     }
 
-    public BillItem(long bill_id, String text, float amount, int price, boolean is_display_unit) {
-        this.bill_id = bill_id;
+    public BillItem(long billId, String text, float amount, int price, boolean isDisplayUnit) {
+        this.billId = billId;
         this.text = text;
         this.amount = amount;
         this.price = price;
-        this.is_display_unit = is_display_unit;
+        this.isDisplayUnit = isDisplayUnit;
     }
 
-    public Long getBill_id() {
-        return bill_id;
+    public long getBillId() {
+        return billId;
     }
 
-    public void setBill_id(long bill_id) {
-        this.bill_id = bill_id;
+    public void setBillId(long billId) {
+        this.billId = billId;
     }
 
     public String getText() {
@@ -51,11 +56,13 @@ public class BillItem {
         this.price = price;
     }
 
-    public boolean isIs_display_unit() {
-        return is_display_unit;
+    @JsonProperty("isDisplayUnit")
+    public boolean isDisplayUnit() {
+        return isDisplayUnit;
     }
 
-    public void setIs_display_unit(boolean is_display_unit) {
-        this.is_display_unit = is_display_unit;
+    @JsonProperty("isDisplayUnit")
+    public void setDisplayUnit(boolean isDisplayUnit) {
+        this.isDisplayUnit = isDisplayUnit;
     }
 }

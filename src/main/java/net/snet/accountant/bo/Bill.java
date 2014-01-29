@@ -1,91 +1,121 @@
 package net.snet.accountant.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yammer.dropwizard.json.JsonSnakeCase;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+@JsonSnakeCase
 public class Bill {
 
     private long id;
     private String number;
-    private Timestamp billing_date;
-    private Timestamp purge_date;
-    private long customer_id;
-    private Timestamp period_from;
-    private Timestamp period_to;
+    @JsonProperty
+    private Timestamp billingDate;
+    @JsonProperty
+    private Timestamp purgeDate;
+    @JsonProperty
+    private long customerId;
+    @JsonProperty
+    private Timestamp periodFrom;
+    @JsonProperty
+    private Timestamp periodTo;
     private int vat;
-    private String hash_code;
-    private boolean is_confirmed;
-    private boolean is_sent;
-    private boolean is_delivered;
-    private boolean is_archived;
-    private boolean deliver_by_mail;
-    private String customer_name;
-    private long invoicing_id;
-    private Timestamp synchronized_bill;
+    @JsonProperty
+    private String hashCode;
+    private boolean isConfirmed;
+    private boolean isSent;
+    private boolean isDelivered;
+    private boolean isArchived;
+    @JsonProperty
+    private boolean deliverByMail;
+    @JsonProperty
+    private String customerName;
+    @JsonProperty
+    private long invoicingId;
+    @JsonProperty("synchronized")
+    private Timestamp synchronizedBill;
     private ArrayList<BillItem> lines;
     private Customer customer;
 
     public Bill() {
     }
 
-    public Bill(long id, String number, Timestamp billing_date, Timestamp purge_date, long customer_id, Timestamp period_from, Timestamp period_to, int vat, String hash_code, boolean is_confirmed, boolean is_sent, boolean is_delivered, boolean is_archived, boolean deliver_by_mail, String customer_name, long invoicing_id, Timestamp synchronized_bill) {
+    public Bill(long id, String number, Timestamp billingDate, Timestamp purgeDate, long customerId, Timestamp periodFrom, Timestamp periodTo, int vat, String hashCode, boolean isConfirmed, boolean isSent, boolean isDelivered, boolean isArchived, boolean deliverByMail, String customerName, long invoicingId, Timestamp synchronizedBill) {
         this.id = id;
         this.number = number;
-        this.billing_date = billing_date;
-        this.purge_date = purge_date;
-        this.customer_id = customer_id;
-        this.period_from = period_from;
-        this.period_to = period_to;
+        this.billingDate = billingDate;
+        this.purgeDate = purgeDate;
+        this.customerId = customerId;
+        this.periodFrom = periodFrom;
+        this.periodTo = periodTo;
         this.vat = vat;
-        this.hash_code = hash_code;
-        this.is_confirmed = is_confirmed;
-        this.is_sent = is_sent;
-        this.is_delivered = is_delivered;
-        this.is_archived = is_archived;
-        this.deliver_by_mail = deliver_by_mail;
-        this.customer_name = customer_name;
-        this.invoicing_id = invoicing_id;
-        this.synchronized_bill = synchronized_bill;
+        this.hashCode = hashCode;
+        this.isConfirmed = isConfirmed;
+        this.isSent = isSent;
+        this.isDelivered = isDelivered;
+        this.isArchived = isArchived;
+        this.deliverByMail = deliverByMail;
+        this.customerName = customerName;
+        this.invoicingId = invoicingId;
+        this.synchronizedBill = synchronizedBill;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String invDescription) {
-        this.number = invDescription;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Timestamp getBilling_date() {
-        return billing_date;
+    public Timestamp getBillingDate() {
+        return billingDate;
     }
 
-    public void setBilling_date(Timestamp billing_date) {
-        this.billing_date = billing_date;
+    public void setBillingDate(Timestamp billingDate) {
+        this.billingDate = billingDate;
     }
 
-    public Timestamp getPurge_date() {
-        return purge_date;
+    public Timestamp getPurgeDate() {
+        return purgeDate;
     }
 
-    public void setPurge_date(Timestamp purge_date) {
-        this.purge_date = purge_date;
+    public void setPurgeDate(Timestamp purgeDate) {
+        this.purgeDate = purgeDate;
     }
 
-    public Timestamp getPeriod_from() {
-        return period_from;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setPeriod_from(Timestamp period_from) {
-        this.period_from = period_from;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
-    public Timestamp getPeriod_to() {
-        return period_to;
+    public Timestamp getPeriodFrom() {
+        return periodFrom;
     }
 
-    public void setPeriod_to(Timestamp period_to) {
-        this.period_to = period_to;
+    public void setPeriodFrom(Timestamp periodFrom) {
+        this.periodFrom = periodFrom;
+    }
+
+    public Timestamp getPeriodTo() {
+        return periodTo;
+    }
+
+    public void setPeriodTo(Timestamp periodTo) {
+        this.periodTo = periodTo;
     }
 
     public int getVat() {
@@ -96,100 +126,84 @@ public class Bill {
         this.vat = vat;
     }
 
-    public String getHash_code() {
-        return hash_code;
+    public String getHashCode() {
+        return hashCode;
     }
 
-    public void setHash_code(String hash_code) {
-        this.hash_code = hash_code;
+    public void setHashCode(String hashCode) {
+        this.hashCode = hashCode;
     }
 
-    public boolean isIs_confirmed() {
-        return is_confirmed;
+    @JsonProperty("isConfirmed")
+    public boolean isConfirmed() {
+        return isConfirmed;
     }
 
-    public void setIs_confirmed(boolean is_confirmed) {
-        this.is_confirmed = is_confirmed;
+    @JsonProperty("isConfirmed")
+    public void setConfirmed(boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
-    public boolean isIs_sent() {
-        return is_sent;
+    @JsonProperty("isSent")
+    public boolean isSent() {
+        return isSent;
     }
 
-    public void setIs_sent(boolean is_sent) {
-        this.is_sent = is_sent;
+    @JsonProperty("isSent")
+    public void setSent(boolean isSent) {
+        this.isSent = isSent;
     }
 
-    public boolean isIs_delivered() {
-        return is_delivered;
+    @JsonProperty("isDelivered")
+    public boolean isDelivered() {
+        return isDelivered;
     }
 
-    public void setIs_delivered(boolean is_delivered) {
-        this.is_delivered = is_delivered;
+    @JsonProperty("isDelivered")
+    public void setDelivered(boolean isDelivered) {
+        this.isDelivered = isDelivered;
     }
 
-    public boolean isIs_archived() {
-        return is_archived;
+    @JsonProperty("isArchived")
+    public boolean isArchived() {
+        return isArchived;
     }
 
-    public void setIs_archived(boolean is_archived) {
-        this.is_archived = is_archived;
+    @JsonProperty("isArchived")
+    public void setArchived(boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
-    public boolean isDeliver_by_mail() {
-        return deliver_by_mail;
+    public boolean isDeliverByMail() {
+        return deliverByMail;
     }
 
-    public void setDeliver_by_mail(boolean deliver_by_mail) {
-        this.deliver_by_mail = deliver_by_mail;
+    public void setDeliverByMail(boolean deliverByMail) {
+        this.deliverByMail = deliverByMail;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Timestamp getSynchronized_bill() {
-        return synchronized_bill;
+    public long getInvoicingId() {
+        return invoicingId;
     }
 
-    public void setSynchronized_bill(Timestamp synchronized_bill) {
-        this.synchronized_bill = synchronized_bill;
+    public void setInvoicingId(long invoicingId) {
+        this.invoicingId = invoicingId;
     }
 
-    public Long getId() {
-        return id;
+    public Timestamp getSynchronizedBill() {
+        return synchronizedBill;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Long getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(long customer_id) {
-        this.customer_id = customer_id;
-    }
-
-    public Long getInvoicing_id() {
-        return invoicing_id;
-    }
-
-    public void setInvoicing_id(long invoicing_id) {
-        this.invoicing_id = invoicing_id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setSynchronizedBill(Timestamp synchronizedBill) {
+        this.synchronizedBill = synchronizedBill;
     }
 
     public ArrayList<BillItem> getLines() {
@@ -198,5 +212,13 @@ public class Bill {
 
     public void setLines(ArrayList<BillItem> lines) {
         this.lines = lines;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

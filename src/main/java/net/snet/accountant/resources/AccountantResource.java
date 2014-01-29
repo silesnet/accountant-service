@@ -39,12 +39,13 @@ public class AccountantResource {
 
         for (BillPatch bill : list.getInvoices()) {
 
-            billDAO.updateBillTime(bill.getId(), bill.getUpdates().get(0).getSynchronized_on());
+            billDAO.updateBillTime(bill.getId(), bill.getUpdates().get(0).getSynchronizedOn());
         }
         return Response.ok().build();
     }
 
     @GET
+    @Produces({"application/json; charset=UTF-8"})
     @Path("/{invoicingId}/invoices")
     @Timed(name = "get-requests")
     public Invoices getInvoices(@PathParam("invoicingId") long invoicing_id) {
@@ -60,7 +61,7 @@ public class AccountantResource {
 
         for (Bill bill : billsList) {
             bill.setLines(getBillItems(bill.getId()));
-            bill.setCustomer(getCustomer(bill.getCustomer_id()));
+            bill.setCustomer(getCustomer(bill.getCustomerId()));
             invoices.addInvoice(bill);
         }
         return invoices;

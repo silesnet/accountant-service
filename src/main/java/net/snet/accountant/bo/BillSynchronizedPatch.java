@@ -1,16 +1,21 @@
 package net.snet.accountant.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yammer.dropwizard.json.JsonSnakeCase;
+
 import java.sql.Timestamp;
 
+@JsonSnakeCase
 public class BillSynchronizedPatch {
 
-    private Timestamp synchronized_on;
+    @JsonProperty
+    private Timestamp synchronizedOn;
 
-    public Timestamp getSynchronized_on() {
-        return synchronized_on;
+    public Timestamp getSynchronizedOn() {
+        return synchronizedOn;
     }
 
-    public void setSynchronized_on(Timestamp synchronized_on) {
-        this.synchronized_on = synchronized_on;
+    public void setSynchronizedOn(Timestamp synchronizedOn) {
+        this.synchronizedOn = synchronizedOn;
     }
 }
