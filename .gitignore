@@ -1,8 +1,12 @@
-.gradle
+.gradle   
+.idea
 build
 .classpath
 .project
 .settings
 .idea
 *.iml
+*.ipr
+*.iws
 /bin
+out

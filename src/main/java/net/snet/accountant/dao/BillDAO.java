@@ -29,11 +29,7 @@ public interface BillDAO {
 
     @SqlQuery("select * from bill_items where bill_id = :id")
     @RegisterMapper(BillItemMapper.class)
-    BillItem findBillItemById(@Bind("id") long id);
-
-    @SqlQuery("select bill_id from bill_items where bill_id = :id")
-    @RegisterMapper(BillItemMapper.class)
-    Iterator<Integer> findAllBillItemsId(@Bind("id") long id);
+    Iterator<BillItem> findBillItemById(@Bind("id") long id);
 
     void close();
 

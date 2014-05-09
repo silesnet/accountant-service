@@ -76,10 +76,10 @@ public class AccountantResource {
     private ArrayList<BillItem> getBillItems(long id) {
         ArrayList<BillItem> retBillItems = new ArrayList<BillItem>();
 
-        Iterator<Integer> billItems = billDAO.findAllBillItemsId(id);
+        Iterator<BillItem> billItems = billDAO.findBillItemById(id);
 
         while (billItems.hasNext()) {
-            retBillItems.add(billDAO.findBillItemById(billItems.next()));
+            retBillItems.add(billItems.next());
         }
         return retBillItems;
     }
