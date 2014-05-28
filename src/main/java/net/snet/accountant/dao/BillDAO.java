@@ -23,7 +23,7 @@ public interface BillDAO {
     @RegisterMapper(BillMapper.class)
     void updateBillTime(@Bind("id") int id, @Bind("time") Timestamp time);
 
-    @SqlQuery("select * from bills where invoicing_id = :id")
+    @SqlQuery("select * from bills where invoicing_id = :id order by number")
     @RegisterMapper(BillMapper.class)
     Iterator<Bill> findAllBillsByInvoicingId(@Bind("id") long id);
 
