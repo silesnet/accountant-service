@@ -15,22 +15,22 @@ import java.util.Iterator;
 
 public interface BillDAO {
 
-    @SqlQuery("select * from bills where id = :id")
-    @RegisterMapper(BillMapper.class)
-    Bill findBillById(@Bind("id") long id);
+	@SqlQuery("select * from bills where id = :id")
+	@RegisterMapper(BillMapper.class)
+	Bill findBillById(@Bind("id") long id);
 
-    @SqlUpdate("update bills set synchronized = :time where id = :id")
-    @RegisterMapper(BillMapper.class)
-    void updateBillTime(@Bind("id") int id, @Bind("time") Timestamp time);
+	@SqlUpdate("update bills set synchronized = :time where id = :id")
+	@RegisterMapper(BillMapper.class)
+	void updateBillTime(@Bind("id") int id, @Bind("time") Timestamp time);
 
-    @SqlQuery("select * from bills where invoicing_id = :id order by number")
-    @RegisterMapper(BillMapper.class)
-    Iterator<Bill> findAllBillsByInvoicingId(@Bind("id") long id);
+	@SqlQuery("select * from bills where invoicing_id = :id order by number")
+	@RegisterMapper(BillMapper.class)
+	Iterator<Bill> findAllBillsByInvoicingId(@Bind("id") long id);
 
-    @SqlQuery("select * from bill_items where bill_id = :id")
-    @RegisterMapper(BillItemMapper.class)
-    Iterator<BillItem> findBillItemById(@Bind("id") long id);
+	@SqlQuery("select * from bill_items where bill_id = :id")
+	@RegisterMapper(BillItemMapper.class)
+	Iterator<BillItem> findBillItemById(@Bind("id") long id);
 
-    void close();
+	void close();
 
 }

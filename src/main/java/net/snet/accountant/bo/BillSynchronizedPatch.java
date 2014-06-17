@@ -8,14 +8,14 @@ import java.sql.Timestamp;
 @JsonSnakeCase
 public class BillSynchronizedPatch {
 
-    @JsonProperty
-    private Timestamp synchronizedOn;
+	@JsonProperty
+	private Timestamp synchronizedOn;
 
-    public Timestamp getSynchronizedOn() {
-        return synchronizedOn;
-    }
+	public Timestamp getSynchronizedOn() {
+		return synchronizedOn;
+	}
 
-    public void setSynchronizedOn(Timestamp synchronizedOn) {
-        this.synchronizedOn = synchronizedOn;
-    }
+	public void setSynchronizedOn(Timestamp synchronizedOn) {
+		this.synchronizedOn = synchronizedOn;
+	}
 }

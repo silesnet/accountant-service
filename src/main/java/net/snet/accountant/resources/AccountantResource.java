@@ -21,77 +21,78 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class AccountantResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountantResource.class);
-    private CustomerDAO customerDAO;
-    private BillDAO billDAO;
-    private Invoices invoices;
+	private static final Logger LOGGER = LoggerFactory.getLogger(AccountantResource.class);
+	private CustomerDAO customerDAO;
+	private BillDAO billDAO;
+	private Invoices invoices;
 
-    public AccountantResource(DBI dbi) {
-        this.customerDAO = dbi.onDemand(CustomerDAO.class);
-        this.billDAO = dbi.onDemand(BillDAO.class);
-    }
 
-    @PATCH
-    @Path("/{invoicingId}")
-    @Timed(name = "post-requests")
-    public Response synchonizedBills(InvoicesPatch list) {
-        LOGGER.debug("synchronized bills called");
+	public AccountantResource(DBI dbi) {
+		this.customerDAO = dbi.onDemand(CustomerDAO.class);
+		this.billDAO = dbi.onDemand(BillDAO.class);
+	}
 
-        for (BillPatch bill : list.getInvoices()) {
+	@PATCH
+	@Path("/{invoicingId}")
+	@Timed(name = "post-requests")
+	public Response synchonizedBills(InvoicesPatch list) {
+		LOGGER.debug("synchronized bills called");
 
-            billDAO.updateBillTime(bill.getId(), bill.getUpdates().get(0).getSynchronizedOn());
-        }
-        return Response.ok().build();
-    }
+		for (BillPatch bill : list.getInvoices()) {
 
-    @GET
-    @Produces({"application/json; charset=UTF-8"})
-    @Path("/{invoicingId}/invoices")
-    @Timed(name = "get-requests")
-    public Invoices getInvoices(@PathParam("invoicingId") long invoicing_id) {
-        LOGGER.debug("invoices called");
+			billDAO.updateBillTime(bill.getId(), bill.getUpdates().get(0).getSynchronizedOn());
+		}
+		return Response.ok().build();
+	}
 
-        invoices = new Invoices();
+	@GET
+	@Produces({"application/json; charset=UTF-8"})
+	@Path("/{invoicingId}/invoices")
+	@Timed(name = "get-requests")
+	public Invoices getInvoices(@PathParam("invoicingId") long invoicing_id) {
+		LOGGER.debug("invoices called");
 
-        Iterator<Bill> bills = billDAO.findAllBillsByInvoicingId(invoicing_id);
-        List<Bill> billsList = new ArrayList<Bill>();
-        while (bills.hasNext()) {
-            billsList.add(bills.next());
-        }
+		invoices = new Invoices();
 
-        for (Bill bill : billsList) {
-            bill.setLines(getBillItems(bill.getId()));
-            bill.setCustomer(getCustomer(bill.getCustomerId()));
-            invoices.addInvoice(bill);
-        }
-        return invoices;
-    }
+		Iterator<Bill> bills = billDAO.findAllBillsByInvoicingId(invoicing_id);
+		List<Bill> billsList = new ArrayList<Bill>();
+		while (bills.hasNext()) {
+			billsList.add(bills.next());
+		}
 
-    /**
-     * Return an ArrayList with BillItems
-     *
-     * @param id Bill Id
-     * @return ArrayList with BillItems
-     */
-    private ArrayList<BillItem> getBillItems(long id) {
-        ArrayList<BillItem> retBillItems = new ArrayList<BillItem>();
+		for (Bill bill : billsList) {
+			bill.setLines(getBillItems(bill.getId()));
+			bill.setCustomer(getCustomer(bill.getCustomerId()));
+			invoices.addInvoice(bill);
+		}
+		return invoices;
+	}
 
-        Iterator<BillItem> billItems = billDAO.findBillItemById(id);
+	/**
+	 * Return an ArrayList with BillItems
+	 *
+	 * @param id Bill Id
+	 * @return ArrayList with BillItems
+	 */
+	private ArrayList<BillItem> getBillItems(long id) {
+		ArrayList<BillItem> retBillItems = new ArrayList<BillItem>();
 
-        while (billItems.hasNext()) {
-            retBillItems.add(billItems.next());
-        }
-        return retBillItems;
-    }
+		Iterator<BillItem> billItems = billDAO.findBillItemById(id);
 
-    /**
-     * Return a Customer object
-     *
-     * @param id Customer Id
-     * @return Customer object
-     */
-    private Customer getCustomer(long id) {
-        Customer retCustomer = customerDAO.findById(id);
-        return retCustomer;
-    }
+		while (billItems.hasNext()) {
+			retBillItems.add(billItems.next());
+		}
+		return retBillItems;
+	}
+
+	/**
+	 * Return a Customer object
+	 *
+	 * @param id Customer Id
+	 * @return Customer object
+	 */
+	private Customer getCustomer(long id) {
+		Customer retCustomer = customerDAO.findById(id);
+		return retCustomer;
+	}
 }

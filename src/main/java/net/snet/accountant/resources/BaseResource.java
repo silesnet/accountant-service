@@ -18,17 +18,17 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 public class BaseResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseResource.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BaseResource.class);
 
-    public BaseResource() {
-    }
+	public BaseResource() {
+	}
 
-    @GET
-    @Timed(name = "get-requests")
-    public Map<String, Object> status() {
-        LOGGER.debug("status called");
-        Map<String, Object> status = new HashMap<String, Object>();
-        status.put("timestamp", new DateTime());
-        return status;
-    }
+	@GET
+	@Timed(name = "get-requests")
+	public Map<String, Object> status() {
+		LOGGER.debug("status called");
+		Map<String, Object> status = new HashMap<String, Object>();
+		status.put("timestamp", new DateTime());
+		return status;
+	}
 }
