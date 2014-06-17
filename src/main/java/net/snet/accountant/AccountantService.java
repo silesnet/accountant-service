@@ -7,6 +7,7 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.jdbi.DBIFactory;
 import net.snet.accountant.resources.AccountantResource;
 import net.snet.accountant.resources.BaseResource;
+import net.snet.accountant.resources.InvoiceResource;
 import org.skife.jdbi.v2.DBI;
 
 public class AccountantService extends Service<AccountantConfiguration> {
@@ -28,6 +29,7 @@ public class AccountantService extends Service<AccountantConfiguration> {
 		}
 
 		environment.addResource(new AccountantResource(dbi));
+		environment.addResource(new InvoiceResource(dbi));
 		environment.addResource(new BaseResource());
 	}
 
