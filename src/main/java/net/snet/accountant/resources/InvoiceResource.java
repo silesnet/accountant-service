@@ -1,18 +1,23 @@
 package net.snet.accountant.resources;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.yammer.metrics.annotation.Timed;
 import net.snet.accountant.bo.Bill;
 import net.snet.accountant.bo.BillItem;
 import net.snet.accountant.dao.BillDAO;
 import net.snet.accountant.dao.CustomerDAO;
+import org.joda.time.DateTime;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -59,4 +64,40 @@ public class InvoiceResource {
 		}
 		return ImmutableMap.of("invoices", (Object) invoices);
 	}
+
+	@PUT
+	@Timed(name = "put-requests")
+	public Response updateCustomers(Map<String, Object> updates) {
+		Map<String, Object> response = Maps.newHashMap();
+		List<Map> updated = Lists.newArrayList();
+		try {
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> invoiceUpdates = (List<Map<String, Object>>) updates.get("invoices");
+			for (Map<String, Object> invoiceUpdate : invoiceUpdates) {
+				try {
+					final String number = invoiceUpdate.get("id").toString();
+					final DateTime synchronizedOn = DateTime.parse(invoiceUpdate.get("synchronized").toString());
+					LOGGER.debug("updating invoice '{}' synchronization time stamp '{}'", number, synchronizedOn);
+					final int changed = invoiceRepository.updateInvoiceSynchronizedTime(number, new Timestamp(synchronizedOn.toDate().getTime()));
+					if (changed != 1) {
+						throw new RuntimeException("invoice '" + number + "' not found, cannot update");
+					}
+					LOGGER.debug("invoice '{}' was synchronized on '{}'", number, synchronizedOn);
+				} catch (Exception e) {
+					LOGGER.error(e.getMessage());
+					invoiceUpdate.put("errors", ImmutableList.of(ImmutableMap.of("message", "" + e.getMessage())));
+				}
+				updated.add(invoiceUpdate);
+			}
+		} catch (Exception e) {
+			response.put("errors", ImmutableList.of(ImmutableMap.of("message", "" + e.getMessage())));
+			throw new WebApplicationException(
+					Response.status(Response.Status.BAD_REQUEST)
+							.entity(response)
+							.build());
+		}
+		response.put("invoices", updated);
+		return Response.ok(response).build();
+	}
+
 }

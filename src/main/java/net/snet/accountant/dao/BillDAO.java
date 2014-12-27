@@ -24,6 +24,10 @@ public interface BillDAO {
 	@RegisterMapper(BillMapper.class)
 	void updateBillTime(@Bind("id") int id, @Bind("time") Timestamp time);
 
+	@SqlUpdate("update bills set synchronized = :stamp where number = :number")
+	@RegisterMapper(BillMapper.class)
+	int updateInvoiceSynchronizedTime(@Bind("number") String number, @Bind("stamp") Timestamp stamp);
+
 	@SqlQuery("select * from bills where invoicing_id = :id order by number")
 	@RegisterMapper(BillMapper.class)
 	Iterator<Bill> findAllBillsByInvoicingId(@Bind("id") long id);
